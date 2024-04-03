@@ -102,17 +102,17 @@ const Register = () => {
                   <Link className="label-text ms-1">Accept Term & Conditions</Link>
                 </label>
                 <div className="form-control mt-6">
-                  <button className="btn bg-[#403F3F] text-white">
+                  <button className="btn hover:bg-black bg-[#403F3F] text-white">
                     Register
                   </button>
                 </div>
 
                 <Link
                   to="/login"
-                  className="text-sm text-center label-text-alt link link-hover"
+                  className="text-sm text-center label-text-alt link link-hover "
                 >
                   Already Have An Account ?{" "}
-                  <span className="text-orange-400">Register</span>
+                  <span className="text-orange-400">Login</span>
                 </Link>
               </form>
             </div>

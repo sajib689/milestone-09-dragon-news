@@ -73,7 +73,7 @@ const Login = () => {
                   
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn bg-[#403F3F] text-white">Login</button>
+                  <button className="btn hover:bg-black bg-[#403F3F] text-white">Login</button>
                 </div>
                 
                     <Link to='/register' className="text-sm text-center label-text-alt link link-hover">
