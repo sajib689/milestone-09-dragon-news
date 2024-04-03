@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../shared/Navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const {handlerRegister} = useContext(AuthContext)
+
+  
     const handleRegister = e => {
         e.preventDefault();
         const form = e.target
@@ -9,7 +15,27 @@ const Register = () => {
         const photoUrl = form.photoUrl.value
         const email = form.email.value
         const password = form.password.value
-
+        handlerRegister(email, password)
+        .then( result => {
+          const user = result.user 
+          if(user) {
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: "Registration Success!",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            form.reset()
+          }
+        })
+        .catch(err => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${err.message}`,
+          });
+        })
     }
   return (
     <div className="max-w-6xl mx-auto">
