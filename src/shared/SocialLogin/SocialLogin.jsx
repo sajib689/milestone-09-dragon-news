@@ -1,8 +1,11 @@
+
 import { CiFacebook } from "react-icons/ci";
 import { FaTwitter,FaInstagram  } from "react-icons/fa";
 
 
+
 const SocialLogin = () => {
+
     return (
         <div className="mt-5">
             <h2 className="text-2xl font-bold">Find Us On</h2>

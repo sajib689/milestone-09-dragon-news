@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../shared/Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
@@ -7,12 +7,12 @@ import Swal from "sweetalert2";
 const Register = () => {
   const {handlerRegister} = useContext(AuthContext)
 
-  
+  const navigate = useNavigate()
     const handleRegister = e => {
         e.preventDefault();
         const form = e.target
-        const name = form.name.value 
-        const photoUrl = form.photoUrl.value
+        // const name = form.name.value 
+        // const photoUrl = form.photoUrl.value
         const email = form.email.value
         const password = form.password.value
         handlerRegister(email, password)
@@ -28,6 +28,7 @@ const Register = () => {
             });
             form.reset()
           }
+          navigate('/')
         })
         .catch(err => {
           Swal.fire({

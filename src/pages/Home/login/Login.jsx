@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../../shared/Navbar/Navbar";
 import Swal from "sweetalert2";
 import { useContext } from "react";
@@ -6,6 +6,7 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const Login = () => {
   const {handleLogin} = useContext(AuthContext)
+  const navigate = useNavigate()
     const handleLoginn = e => {
         e.preventDefault();
         const form = e.target
@@ -24,6 +25,7 @@ const Login = () => {
             });
             form.reset()
           }
+          navigate('/')
           
         })
         .catch(err => {

@@ -1,6 +1,32 @@
-import { Link } from 'react-router-dom';
-import user from '../../assets/user.png'
+import { Link, useNavigate } from 'react-router-dom';
+import userImg from '../../assets/user.png'
+import { useContext } from 'react';
+import { AuthContext } from './../../AuthProvider/AuthProvider';
 const Navbar = () => {
+  const {user,handleSignOut} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const logOut = () => {
+    handleSignOut()
+    .then(() => {
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Log Out Successfully",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      navigate('/')
+    })
+    .catch(err => {
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: `${err.message}`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    })
+  }
   const links = (
     <>
       <li>
@@ -50,8 +76,17 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end ">
-        <img className='w-[41px] h-[41px]' src={user} alt="" />
-        <Link to='/login' className='btn bg-[#403F3F] text-white ms-2 hover:bg-[#403F3F]'>Login</Link>
+        {
+          user ? 
+          <img className='w-[41px] h-[41px]' src={user?.photoURL} alt="" />
+        :
+        <img className='w-[41px] h-[41px]' src={userImg} alt="" />
+        }{
+          user ?
+          <Link onClick={logOut} className='btn bg-[#403F3F] text-white ms-2 hover:bg-[#403F3F]'>Sign Out</Link>
+          :
+          <Link to='/login' className='btn bg-[#403F3F] text-white ms-2 hover:bg-[#403F3F]'>Login</Link>
+        }
       </div>
     </div>
   );
