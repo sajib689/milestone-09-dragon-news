@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
+import { FaStar,FaEye } from "react-icons/fa";
 
 const NewsCard = ({ aNews }) => {
-  const { title, author, total_view, thumbnail_url, image_url, details } =
+  const { title, author, total_view,rating, thumbnail_url, image_url, details } =
     aNews;
   console.log(aNews);
   return (
-    <div className="card card-compact bg-base-100 shadow-xl">
-      <div className="flex justify-between">
+    <div className="card card-compact bg-base-100 shadow-xl mt-3">
+      <div className="flex justify-between p-3">
         <div className="flex justify-center gap-2">
           <img
             className="w-[41px] h-[41px] rounded-full"
             src={author.img}
-            alt=""
           />
           <div className="flex flex-col">
             <p>{author.name}</p>
@@ -55,15 +55,37 @@ const NewsCard = ({ aNews }) => {
           </Link>
         </div>
       </div>
-      <h2 className="card-title mt-2 mb-4">{title}</h2>
+      <h2 className="card-title mt-2 mb-4 p-3">{title}</h2>
       <figure>
         <img src={image_url} alt="Shoes" />
       </figure>
       <div className="card-body">
-        
-        <p>{details.length > 200}</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+        <p>
+          {details.length > 200 ? (
+            <>
+              {details.slice(0, 200)}{" "}
+              <Link className="text-[#F75B5F] font-bold" to="#">
+                Read More...
+              </Link>
+            </>
+          ) : (
+            <>{details}</>
+          )}
+        </p>
+            <hr />
+        <div className="card-actions justify-between">
+          <div className="flex gap-1 justify-center items-center">
+          <FaStar className="text-[#FF8C47] text-[20px]" />
+          <FaStar className="text-[#FF8C47] text-[20px]" />
+          <FaStar className="text-[#FF8C47] text-[20px]" />
+          <FaStar className="text-[#FF8C47] text-[20px]" />
+          <FaStar className="text-[#FF8C47] text-[20px]" />
+          <p className="text-[#706F6F] text-[17px]">{rating.number}</p>
+          </div>
+          <div className="flex gap-2 justify-center items-center">
+          <FaEye/>
+          <p className="text-[#706F6F] text-[17px]">{total_view}</p>
+          </div>
         </div>
       </div>
     </div>
