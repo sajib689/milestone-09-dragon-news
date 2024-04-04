@@ -5,9 +5,16 @@ import RightSideNav from "../../shared/RightSideNav/RightSideNav";
 import LeftSideNav from "./../../shared/LeftSideNav/LeftSideNav";
 import BreakingNews from "./BreakingNews";
 import NewsCard from "./NewsCard";
+import Loader from "../../Components/Loader";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Home = () => {
   const news = useLoaderData();
+  const {loading} = useContext(AuthContext)
+  if(loading) {
+    return <Loader/>
+  }
   return (
     <div>
       <Header />
@@ -19,7 +26,7 @@ const Home = () => {
         </div>
         <div className="col-span-2">
           {
-            news.map( aNews => <NewsCard aNews={aNews} key={aNews._id}></NewsCard>)
+            news?.map( aNews => <NewsCard aNews={aNews} key={aNews._id}></NewsCard>)
           }
         </div>
         <div>

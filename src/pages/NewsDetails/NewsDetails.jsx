@@ -1,12 +1,21 @@
-import { Link } from "react-router-dom";
-import { FaStar,FaEye } from "react-icons/fa";
+import { Link, useLoaderData, useParams } from "react-router-dom";
+import Header from "../../shared/Header/Header";
+import Navbar from "../../shared/Navbar/Navbar";
+import RightSideNav from "../../shared/RightSideNav/RightSideNav";
 
-const NewsCard = ({ aNews }) => {
-  const {_id, title, author, total_view,rating, thumbnail_url, image_url, details } =
-    aNews;
-
+const NewsDetails = () => {
+    const {id} = useParams()
+    const newss = useLoaderData()
+    const news = newss.find(news => news._id === id)
+    const {_id, title, author, total_view,rating, thumbnail_url, image_url, details } =
+    news;
   return (
-    <div className="card card-compact bg-base-100 shadow-xl mt-3">
+    <div className="max-w-6xl mx-auto">
+      <Header />
+      <Navbar />
+      <div className="grid grid-cols lg:grid-cols-3 gap-6">
+        <div className="col-span-2 ">
+        <div className="card card-compact bg-base-100 shadow-xl mt-3">
       <div className="flex justify-between p-3">
         <div className="flex justify-center gap-2">
           <img
@@ -57,39 +66,23 @@ const NewsCard = ({ aNews }) => {
       </div>
       <h2 className="card-title mt-2 mb-4 p-3">{title}</h2>
       <figure>
-        <img src={thumbnail_url} alt="Shoes" />
+        <img src={image_url} alt="Shoes" />
       </figure>
       <div className="card-body">
         <p>
-          {details.length > 200 ? (
-            <>
-              {details.slice(0, 200)}{" "}
-              <Link to={`/details/${_id}`} className="text-[#F75B5F] font-bold">
-                Read More...
-              </Link>
-            </>
-          ) : (
-            <>{details}</>
-          )}
+         
+         {details}
         </p>
-            <hr />
-        <div className="card-actions justify-between">
-          <div className="flex gap-1 justify-center items-center">
-          <FaStar className="text-[#FF8C47] text-[20px]" />
-          <FaStar className="text-[#FF8C47] text-[20px]" />
-          <FaStar className="text-[#FF8C47] text-[20px]" />
-          <FaStar className="text-[#FF8C47] text-[20px]" />
-          <FaStar className="text-[#FF8C47] text-[20px]" />
-          <p className="text-[#706F6F] text-[17px]">{rating.number}</p>
-          </div>
-          <div className="flex gap-2 justify-center items-center">
-          <FaEye/>
-          <p className="text-[#706F6F] text-[17px]">{total_view}</p>
-          </div>
+     
+      </div>
+    </div>
+        </div>
+        <div>
+        <RightSideNav />
         </div>
       </div>
     </div>
   );
 };
 
-export default NewsCard;
+export default NewsDetails;
